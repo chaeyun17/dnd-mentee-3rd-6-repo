@@ -5,6 +5,7 @@ import org.dnd3.udongsa.neighborcats.feed.dto.FeedModifyDto;
 import org.dnd3.udongsa.neighborcats.feed.dto.FeedSaveDto;
 import org.dnd3.udongsa.neighborcats.feed.dto.FeedSearchDto;
 import org.dnd3.udongsa.neighborcats.feed.dto.PagingDto;
+import org.springframework.data.domain.Pageable;
 
 public interface FeedService {
 
@@ -17,5 +18,7 @@ public interface FeedService {
 	FeedDto delete(Long id);
 
 	FeedDto modify(Long id, FeedModifyDto modifyDto);
+
+	PagingDto<FeedDto> findAllByServant(Long servantId, Pageable pageable);
   
 }

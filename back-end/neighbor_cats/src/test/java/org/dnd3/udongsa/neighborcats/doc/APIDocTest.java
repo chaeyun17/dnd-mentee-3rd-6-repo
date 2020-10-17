@@ -4,6 +4,8 @@ import org.dnd3.udongsa.neighborcats.auth.AuthController;
 import org.dnd3.udongsa.neighborcats.auth.service.AuthService;
 import org.dnd3.udongsa.neighborcats.catkind.CatKindController;
 import org.dnd3.udongsa.neighborcats.catkind.service.CatKindService;
+import org.dnd3.udongsa.neighborcats.feed.controller.FeedController;
+import org.dnd3.udongsa.neighborcats.feed.service.FeedService;
 import org.dnd3.udongsa.neighborcats.imgfile.controller.BasicImgFileController;
 import org.dnd3.udongsa.neighborcats.imgfile.service.BasicImgFileService;
 import org.dnd3.udongsa.neighborcats.security.jwt.JwtUtils;
@@ -26,6 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
         ,CatKindController.class
         ,BasicImgFileController.class
         ,ServantController.class
+        ,FeedController.class
 })
 @AutoConfigureRestDocs
 @AutoConfigureMockMvc(addFilters = false)
@@ -42,6 +45,7 @@ public class APIDocTest {
   @MockBean protected CatKindService catKindService;
   @MockBean protected BasicImgFileService basicImgFileService;
   @MockBean protected ServantService servantService;
+  @MockBean protected FeedService feedService;
 
   @Test
   public void init(){}

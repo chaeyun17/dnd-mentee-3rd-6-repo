@@ -26,10 +26,12 @@ import org.dnd3.udongsa.neighborcats.security.service.SecurityContextService;
 import org.dnd3.udongsa.neighborcats.servant.dto.AuthorDto;
 import org.dnd3.udongsa.neighborcats.servant.entity.Servant;
 import org.dnd3.udongsa.neighborcats.servant.entity.ServantMapper;
+import org.dnd3.udongsa.neighborcats.servant.repository.ServantRepository;
 import org.dnd3.udongsa.neighborcats.servant.service.ServantService;
 import org.dnd3.udongsa.neighborcats.tag.Tag;
 import org.dnd3.udongsa.neighborcats.util.TimeDescService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -199,6 +201,20 @@ public class FeedServiceImpl implements FeedService {
       throw new CustomException(HttpStatus.BAD_REQUEST, "이미지를 한 개 이상 업로드해야 합니다.");
     }
     return toDto(persist, true);
+  }
+
+  @Override
+  public PagingDto<FeedDto> findAllByServant(Long servantId, Pageable pageable){
+    
+    boolean isExistServant = servantService.isExistId(servantId);
+    if(isExistServant == false){
+      throw new CustomException(HttpStatus.BAD_REQUEST, "존재하지 않는 Servant 입니다.", "servantId: {}", servantId);
+    }
+    // 페이지네이션 정보와 servant로 feed 조회
+    Page<Feed> pageFeeds = repo.findByAuthorId(servantId, pageable);
+    // comments 없이 페이징 feedDto로 변환
+    List<FeedDto> feedDtoList = feedMapperService.toDto(pageFeeds.getContent(), false);
+    return PagingMapper.map(pageFeeds, feedDtoList);
   }
 
 

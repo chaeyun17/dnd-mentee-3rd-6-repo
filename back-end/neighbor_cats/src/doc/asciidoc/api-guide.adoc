@@ -25,3 +25,7 @@ operation::AuthDoc/signUp[snippets='http-request,request-parameters,response-hea
 == 이미지 파일
 === 집사 기본 프로필 이미지 업로드
 operation::BasicImgFileDoc/uploadServant[snippets='http-request,response-body,response-fields']
+
+== 피드 Feed
+=== 특정 유저가 작성한 피드 조회
+operation::FeedDoc/getServantFeeds[snippets='http-request,path-parameters,request-parameters,response-body,response-fields']

@@ -20,4 +20,6 @@ public interface ServantService {
   Boolean isExistNickname(String nickname);
 
   ServantDto getMe();
+
+  boolean isExistId(Long servantId);
 }

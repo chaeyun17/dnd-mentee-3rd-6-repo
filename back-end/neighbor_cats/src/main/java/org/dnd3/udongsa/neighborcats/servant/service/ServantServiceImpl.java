@@ -108,5 +108,10 @@ public class ServantServiceImpl implements ServantService {
     return servantMapper.map(servant);
   }
 
+  @Override
+  public boolean isExistId(Long servantId) {
+    return repo.existsById(servantId);
+  }
+
 
 }
